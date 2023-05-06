@@ -8,11 +8,11 @@ MainGame::MainGame() {
 	width = 800;
 	height = 600;
 	gameState = GameState::PLAY;
+	timerSpawn = 0.0f;
 }
 
 
 MainGame::~MainGame() {
-
 }
 
 
@@ -30,6 +30,7 @@ void MainGame::processInput() {
 		}
 	}
 }
+
 
 void MainGame::init() {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -53,15 +54,37 @@ void MainGame::init() {
 void MainGame::draw() {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	sprite.draw();
-	//si tengo elementos actualizo
+	// sprite.draw();
+
+	srand(time(NULL));
+
+	timerSpawn += 0.01f;
+
+	if (timerSpawn > 1.0f) {
+		timerSpawn = 0.0f;
+		sprites.push_back(Sprite());
+		float _x = float(rand() % 201 - 100) / 100;
+		float _y = float(rand() % 201 - 100) / 100;
+		cout << _x << " - " << _y << endl;
+		sprites[sprites.size() - 1].init(_x, _y, 1, 1);
+	}
+
+	for (size_t i = 0; i < sprites.size(); i++) {
+		sprites[i].draw();
+	}
+
 	SDL_GL_SwapWindow(window);
 }
 
 
 void MainGame::run() {
 	init();
-	sprite.init(-1, -1, 1, 1);
+
+	sprites.push_back(Sprite());
+
+	sprites[0].init(-1, -1, 1, 1);
+
+	// sprite.init(-1, -1, 1, 1);
 	update();
 }
 

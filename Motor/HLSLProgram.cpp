@@ -15,12 +15,10 @@ HLSLProgram::~HLSLProgram() {
 
 
 void HLSLProgram::addAtribute(const string attributeName) {
-
 }
 
 
 void HLSLProgram::use() {
-
 }
 
 
@@ -64,7 +62,7 @@ void HLSLProgram::compileShader(const string& shaderPath, GLuint id) {
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &maxLenght);
 		vector<GLchar> infoLog(maxLenght);
 		glGetShaderInfoLog(id, maxLenght, &maxLenght, &infoLog[0]);
-		fatalError("Shader ");
+		fatalError("Shader " + shaderPath + " could not compile ");
 		glDeleteShader(id);
 		return;
 	}
@@ -83,7 +81,7 @@ void HLSLProgram::linkShader() {
 		vector<GLchar> infoLog(maxLength);
 		glGetProgramInfoLog(programID, maxLength, &maxLength, &infoLog[0]);
 		glDeleteProgram(programID);
-		fatalError("Shaders could not link");
+		fatalError("Shaders could not link ");
 		glDeleteShader(vertexShaderID);
 		glDeleteShader(fragmentShaderID);
 		return;
