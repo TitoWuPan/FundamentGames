@@ -12,7 +12,6 @@ MainGame::MainGame() {
 
 
 MainGame::~MainGame() {
-
 }
 
 
@@ -30,6 +29,7 @@ void MainGame::processInput() {
 		}
 	}
 }
+
 
 void MainGame::init() {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -53,15 +53,24 @@ void MainGame::init() {
 void MainGame::draw() {
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	sprite.draw();
-	//si tengo elementos actualizo
+	// sprite.draw();
+
+	for (size_t i = 0; i < sprites.size(); i++) {
+		sprites[i].draw();
+	}
 	SDL_GL_SwapWindow(window);
 }
 
 
 void MainGame::run() {
 	init();
-	sprite.init(-1, -1, 1, 1);
+
+	sprites = { Sprite(), Sprite() };
+
+	sprites[0].init(-1, -1, 1, 1);
+	sprites[1].init(0, 0, 1, 1);
+
+	// sprite.init(-1, -1, 1, 1);
 	update();
 }
 
