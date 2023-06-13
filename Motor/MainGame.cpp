@@ -102,10 +102,8 @@ void MainGame::initLevel() {
 	//inicializar humans,player y zombie
 
 	std::mt19937 randomEngine(time(nullptr));
-	std::uniform_int_distribution<int>randPosX(
-		1, levels[currentLevel]->getWidth() - 2);
-	std::uniform_int_distribution<int>randPosY(
-		1, levels[currentLevel]->getHeight() - 2);
+	std::uniform_int_distribution<int>randPosX( 1, levels[currentLevel]->getWidth() - 2);
+	std::uniform_int_distribution<int>randPosY( 1, levels[currentLevel]->getHeight() - 2);
 
 	for (size_t i = 0; i < levels[currentLevel]->getNumHumans(); i++)
 	{
@@ -114,11 +112,11 @@ void MainGame::initLevel() {
 		humans.back()->init(5.0f, pos);
 	}
 
-	for (size_t i = 0; i < levels[currentLevel]->getnumZombies(); i++)
+	for (size_t i = 0; i < levels[currentLevel]->getZombiesPosition().size(); i++)
 	{
 		zombies.push_back(new Zombie());
-		glm::vec2 pos(randPosX(randomEngine) * TILE_WIDTH, randPosY(randomEngine) * TILE_WIDTH);
-		zombies.back()->init(3.0f, pos);
+		glm::vec2 pos(levels[currentLevel]->getZombiesPosition()[i].x, levels[currentLevel]->getZombiesPosition()[i].y);
+		zombies.back()->init(0.0f, pos);
 	}
 
 	player = new Player();
