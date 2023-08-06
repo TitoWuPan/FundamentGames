@@ -11,7 +11,7 @@ Player::~Player()
 
 void Player::init(float speed, glm::vec2 position, InputManager* inputManager)
 {
-	this->path = "Textures/circle.png";
+	this->path = "Textures/plana.png";
 	this->speed = speed;
 	this->position = position;
 	this->inputManager = inputManager;

@@ -61,11 +61,13 @@ void MainGame::handleInput()
 			camera2D.setScale(camera2D.getScale() - SCALE_SPEED);
 		}
 	}
+	
 	if (inputManager.isKeyPressed(SDLK_f)) {
 		cout << "- - - - - - - - - - - - - - - - - -" << endl;
 		cout << "Total Zombies: " << zombies.size() << endl;
 		cout << "Total Humanos: " << humans.size() << endl;
 	}
+
 	if (inputManager.isKeyPressed(SDL_BUTTON_LEFT)) {
 		//cout << "CLICK IZQUIERDO" << endl;
 		createBullet();
@@ -132,8 +134,7 @@ void MainGame::initLevel() {
 	for (size_t i = 0; i < levels[currentLevel]->getNumHumans(); i++)
 	{
 		humans.push_back(new Human());
-		glm::vec2 pos(randPosX(randomEngine) * TILE_WIDTH,
-			randPosY(randomEngine) * TILE_WIDTH);
+		glm::vec2 pos(randPosX(randomEngine) * TILE_WIDTH, randPosY(randomEngine) * TILE_WIDTH);
 		humans.back()->init(1.0f, pos);
 	}
 
@@ -191,7 +192,7 @@ void MainGame::drawHud()
 
 	char buffer[256];
 	hudBatch.begin();
-	sprintf_s(buffer, "TEST");
+	sprintf_s(buffer, "Test");
 	Color color;
 	color.set(255, 255, 255, 255);
 	spriteFont->draw(hudBatch, buffer, glm::vec2(0, 0),
